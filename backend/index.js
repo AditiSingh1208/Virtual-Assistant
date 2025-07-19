@@ -9,15 +9,31 @@ import userRouter from './routes/user.routes.js';
 import geminieResponse from './gemini.js';
 
 
-const app = express()
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://virtual-assistant-auq1.onrender.com"
+];
+
 app.use(cors({
-    origin:"https://virtual-assistant-auq1.onrender.com",
-    credentials:true,
-}))
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+}));
+
 const port = process.env.PORT;
 
 app.use(express.json())
 app.use(cookieParser())
+
+app.get("/", (req, res) => {
+  res.send("Backend is running!");
+});
+
 app.use("/api/auth" , authRouter)
 app.use("/api/user" , userRouter)
 
