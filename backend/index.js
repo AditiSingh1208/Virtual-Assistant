@@ -14,7 +14,7 @@ app.use(cors({
     origin:"https://virtual-assistant-auq1.onrender.com",
     credentials:true,
 }))
-const port = process.env.PORT || 5173;
+const port = process.env.PORT;
 
 app.use(express.json())
 app.use(cookieParser())
