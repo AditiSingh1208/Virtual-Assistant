@@ -8,6 +8,7 @@ import cors from 'cors';
 import userRouter from './routes/user.routes.js';
 import geminieResponse from './gemini.js';
 
+const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173",
